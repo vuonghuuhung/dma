@@ -1,24 +1,31 @@
-import logo from './logo.svg';
-import './App.css';
+import { useState } from "react";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import ShareLayout from "./pages/ShareLayout";
+import Login from "./pages/Login";
+import User from "./pages/User";
+import Diploma from "./pages/Diploma";
+import DiplomaType from "./pages/DiplomaType";
+import Rank from "./pages/Rank";
+import TrainingProgram from "./pages/TrainingProgram";
+import TrainingType from "./pages/TrainingType";
 
 function App() {
+  const [user, setUser] = useState(null);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<ShareLayout />}>
+          <Route index element={<Login user={user} setUser={setUser} />} />
+          <Route path="/user" element={<User />} />
+          <Route path="/diploma" element={<Diploma />} />
+          <Route path="/diploma-type" element={<DiplomaType />} />
+          <Route path="/rank" element={<Rank />} />
+          <Route path="/training-program" element={<TrainingProgram />} />
+          <Route path="/training-type" element={<TrainingType />} />
+        </Route>
+      </Routes>
+    </BrowserRouter>
   );
 }
 
